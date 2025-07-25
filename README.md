@@ -4,7 +4,7 @@ read lord of the mysteries please
 
 
 does this work
-| Syntax | Description |
+| Functional Requirements | Non Functional Requirements|
 | ----------- | ----------- |
-| Header | Title |
+| Navigate between pages using links/buttons | Title |
 | Paragraph | Text |
