@@ -1,9 +1,13 @@
 # hello-world-real
-redo
-read lord of the mysteries please
 
+### Project Description
+# A messaging platform simililar in functionality to instagram
 
-does this work
+3 pages
+Homepage/FYP
+Messaging
+Profile
+
 | Functional Requirements | Non Functional Requirements|
 | ----------- | ----------- |
 | Navigate between pages using links/buttons | Acceptable load times (1 second)|
