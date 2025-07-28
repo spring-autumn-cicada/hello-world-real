@@ -14,3 +14,8 @@ Profile
 | Login functionality | Visually aesthetic |
 |Send and save messages to a database which can then be retrieved|Streamlined ui for smooth user experience|
 |Share images |Intuitive interface|
+
+Design decisions
+- Minimalistic aesthetics (White,light colours)
+- legible, unadorned font,
+- 1-2 font families
