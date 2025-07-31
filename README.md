@@ -19,3 +19,5 @@ Design decisions
 - Minimalistic aesthetics (White,light colours)
 - legible, unadorned font,
 - 1-2 font families
+
+
