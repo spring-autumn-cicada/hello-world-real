@@ -21,5 +21,4 @@ Design decisions
 - 1-2 font families
 
 Sketches/Wireframes
-![Sketch ](1000022271.jpg)
-
+![sketch](image.png)
