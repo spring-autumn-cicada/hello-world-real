@@ -23,5 +23,5 @@ Design decisions
 Sketches/Wireframes
 
 
-![sketch 1](../../Downloads/1000022270.jpg)
+![sketch 1](1000022270.jpg)
 ![sketch 2](../../Downloads/1000022271.jpg)
