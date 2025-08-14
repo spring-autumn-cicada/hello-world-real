@@ -31,3 +31,13 @@ Algorithms
 Flow chart for Login Functionality
 ![flowchart](<Screenshot 2025-08-14 111442.png>)
 
+Test Case 1: 
+
+Test Case ID: TC 001
+Test Case Name: User login functionality
+Preconditions: User is registered on website, users data is recorded on database,
+Test Steps:
+- Open website
+- Input details into relevant fields
+- Press login button
+Expected Result: Succesfully logs in and unlocks website
