@@ -23,3 +23,5 @@ Design decisions
 Sketches/Wireframes
 ![Sketch 1](1000022271-1.jpg)
 ![ketch 2](1000022270.jpg)
+
+Alternative designs
