@@ -42,5 +42,5 @@ Test Steps:
 
 - Open website
 - Input details into relevant fields
-- Press login button
-  Expected Result: Succesfully logs in and unlocks website
+- Press login button 
+- Expected Result: Succesfully logs in and unlocks website
