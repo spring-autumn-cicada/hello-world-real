@@ -23,8 +23,8 @@ Design decisions
 - 1-2 font families
 
 Sketches/Wireframes
-![Sketch 1](1000022271-1.jpg)
-![ketch 2](1000022270.jpg)
+![Sketch 1](working_documents/1000022271-1.jpg)
+![Sketch 2](working_documents/1000022270.jpg)
 
 Alternative designs
 
