@@ -8,4 +8,11 @@
     <h1>input stuff here</h1>
     <p>This is a paragraph.</p>
   </body>
+
+  <body>
+    <main>
+      {% include "partials/menu.html" %} {% block content %}{% endblock %}
+    </main>
+    <script src="static/js/app.js"></script>
+  </body>
 </html>

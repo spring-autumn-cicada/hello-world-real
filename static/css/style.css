@@ -21,11 +21,11 @@ main {
 nav {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: centre;
 }
 
 nav img {
-  height: 100px;
+  height: 60px;
 }
 
 nav ul {

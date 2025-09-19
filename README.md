@@ -31,7 +31,7 @@ Alternative designs
 Algorithms
 
 Flow chart for Login Functionality
-![flowchart](<Screenshot 2025-08-14 111442.png>)
+![flowchart](<working_documents/Screenshot 2025-08-14 111442.png>)
 
 Test Case 1:
 
