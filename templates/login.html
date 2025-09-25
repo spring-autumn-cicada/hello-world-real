@@ -2,16 +2,59 @@
 <html>
   <head>
     <title>Login page</title>
+    <link rel="stylesheet" href="static/css/style.css" />
+    <style>
+      /* Only affects the login page */
+      body {
+        background: #fdfdfd;
+      }
+      main {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
   </head>
-  <link rel="stylesheet" href="static/css/style.css" />
   <body>
-    <h1>input stuff here</h1>
-    <p>This is a paragraph.</p>
-  </body>
-
-  <body>
+    {% include "partials/menu.html" %}
     <main>
-      {% include "partials/menu.html" %} {% block content %}{% endblock %}
+      <div class="center-box">
+        <h1>Login</h1>
+        <form method="post">
+          <div style="margin-bottom: 1rem; width: 100%">
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              required
+              style="
+                width: 100%;
+                padding: 0.5rem;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+              "
+            />
+          </div>
+          <div style="margin-bottom: 1rem; width: 100%">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+              style="
+                width: 100%;
+                padding: 0.5rem;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+              "
+            />
+          </div>
+          <button class="btn" type="submit">Login</button>
+        </form>
+      </div>
+      {% block content %}{% endblock %}
     </main>
     <script src="static/js/app.js"></script>
   </body>
