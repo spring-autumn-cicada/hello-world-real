@@ -1,16 +1,43 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>messages page</title>
+    <title>Messages</title>
+    <link rel="stylesheet" href="static/css/style.css" />
   </head>
-  <link rel="stylesheet" href="static/css/style.css" />
   <body>
-    <h1>input stuff here</h1>
-    <p>This is a paragraph.</p>
-  </body>
-  <body>
+    {% include "partials/menu.html" %}
     <main>
-      {% include "partials/menu.html" %} {% block content %}{% endblock %}
+      <div class="messages-wrapper">
+        <div class="chat-list">
+          <div class="chat-user active">xx</div>
+          <div class="chat-user">xx</div>
+          <div class="chat-user">xx</div>
+          <div class="chat-user">xx</div>
+          <div class="chat-user">xx</div>
+          <div class="chat-user">xx</div>
+        </div>
+        <div class="chat-content">
+          <div class="messages">
+            <div class="message">
+              <div class="message-bubble">x</div>
+            </div>
+            <div class="message sent">
+              <div class="message-bubble">x</div>
+            </div>
+            <div class="message">
+              <div class="message-bubble">x</div>
+            </div>
+            <div class="message sent">
+              <div class="message-bubble">x</div>
+            </div>
+          </div>
+          <form class="chat-input-form">
+            <input type="text" placeholder="Type a message..." />
+            <button class="btn" type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+      {% block content %}{% endblock %}
     </main>
     <script src="static/js/app.js"></script>
   </body>
