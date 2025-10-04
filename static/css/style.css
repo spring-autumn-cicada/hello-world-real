@@ -53,7 +53,15 @@ nav ul li a:hover {
 nav h1 {
   color: #106d69;
   margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
 }
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* space between logo and heading */
+}
+
 .profile-container {
   max-width: 400px;
   margin: 3rem auto;

@@ -4,28 +4,104 @@
     <title>Profile Page</title>
     <link rel="stylesheet" href="static/css/style.css" />
     <style>
-      main {
+      .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+      .profile-avatar {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #14e6dd;
+      }
+      .profile-details {
+        text-align: left;
+      }
+      .profile-details h1 {
+        margin-bottom: 0.5rem;
+      }
+      .profile-stats {
+        display: flex;
+        gap: 2rem;
+        margin: 1rem 0;
+      }
+      .profile-stats div {
+        font-weight: bold;
+      }
+      .posts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
         margin-top: 2rem;
+      }
+      .post-item {
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        aspect-ratio: 1/1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .post-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
     </style>
   </head>
   <body>
+    {% include "partials/menu.html" %}
     <main>
-      {% include "partials/menu.html" %}
-      <div class="profile-container">
-        <img
-          src="static/images/avatar.png"
-          alt="Profile Avatar"
-          class="profile-avatar"
-        />
-        <h1>John Doe</h1>
-        <div class="profile-info">
-          <p><strong>Email:</strong> johndoe@example.com</p>
-          <p>
-            <strong>Bio:</strong> Enthusiastic developer and lifelong learner.
-          </p>
+      <div
+        class="profile-container"
+        style="background: none; box-shadow: none; max-width: 700px"
+      >
+        <div class="profile-header">
+          <img
+            src="static/images/avatar.png"
+            alt="Profile Avatar"
+            class="profile-avatar"
+          />
+          <div class="profile-details">
+            <h1>John Doe</h1>
+            <div class="profile-stats">
+              <div><span>12</span> posts</div>
+              <div><span>340</span> followers</div>
+              <div><span>180</span> following</div>
+            </div>
+            <p><strong>Email:</strong> johndoe@example.com</p>
+            <p>
+              <strong>Bio:</strong> Enthusiastic developer and lifelong learner.
+            </p>
+            <button class="btn" style="margin-top: 1rem">Edit Profile</button>
+          </div>
         </div>
-        <button class="btn">Edit Profile</button>
+        <hr style="margin: 2rem 0" />
+        <div class="posts-grid">
+          <div class="post-item">
+            <img src="static/images/post1.jpg" alt="Post 1" />
+          </div>
+          <div class="post-item">
+            <img src="static/images/post2.jpg" alt="Post 2" />
+          </div>
+          <div class="post-item">
+            <img src="static/images/post3.jpg" alt="Post 3" />
+          </div>
+          <div class="post-item">
+            <img src="static/images/post4.jpg" alt="Post 4" />
+          </div>
+          <div class="post-item">
+            <img src="static/images/post5.jpg" alt="Post 5" />
+          </div>
+          <div class="post-item">
+            <img src="static/images/post6.jpg" alt="Post 6" />
+          </div>
+        </div>
       </div>
       {% block content %}{% endblock %}
     </main>
