@@ -14,8 +14,15 @@ def add_user(username, password, email, account_creation_date):
     cur = con.cursor()
     try:
         cur.execute(
-            "INSERT INTO user_data (username, password, email, account_creation_date) VALUES (?, ?, ?, ?)",
-            (username, password, email, account_creation_date),
+            "INSERT INTO user_data "
+            "(username, password, email, account_creation_date) "
+            "VALUES (?, ?, ?, ?)",
+            (
+                username,
+                password,
+                email,
+                account_creation_date,
+            ),
         )
         con.commit()
         return True

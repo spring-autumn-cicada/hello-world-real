@@ -3,7 +3,8 @@ import database_manager as dbHandler
 from datetime import datetime
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key"  # Needed for session and flash
+app.secret_key = "your_secret_key"
+# Needed for session and flash
 
 
 @app.route("/")
@@ -39,7 +40,10 @@ def aboutmessages():
 def aboutprofile():
     if "user" not in session:
         return redirect(url_for("aboutlogin"))
-    return render_template("profile.html")
+    user = dbHandler.get_user(session["user"])
+    username = user[1] if user else ""
+    email = user[3] if user else ""
+    return render_template("profile.html", username=username, email=email)
 
 
 @app.route("/logout")
@@ -63,7 +67,7 @@ def signup():
         username = request.form.get("username")
         password = request.form.get("password")
         email = request.form.get("email")
-        account_creation_date = datetime.now().strftime("%d/%m/%Y")  # dd/mm/yyyy format
+        account_creation_date = datetime.now().strftime("%d/%m/%Y")
         if dbHandler.get_user(username):
             error = "Username already exists"
         else:
