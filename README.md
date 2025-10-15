@@ -7,6 +7,13 @@
 - press 'ctrl' + '`' to open terminal
 - open a new bash terminal and run 'python main.py'
 
+User details
+Username: final
+Password: final
+
+Username: cheese
+Password: cheese
+
 ### Project Description
 
 # A messaging platform simililar in functionality to instagram
