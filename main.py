@@ -1,4 +1,11 @@
-from flask import Flask, render_template, redirect, url_for, request, flash, session
+from flask import (
+    Flask,
+    render_template,
+    redirect,
+    url_for,
+    request,
+    session,
+)
 import database_manager as dbHandler
 from datetime import datetime
 
@@ -29,11 +36,53 @@ def aboutlogin():
     return render_template("login.html", error=error)
 
 
-@app.route("/messages.html")
+@app.route("/update_bio", methods=["POST"])
+def update_bio():
+    if "user" not in session:
+        return redirect(url_for("aboutlogin"))
+    bio = request.form.get("bio", "")
+    dbHandler.update_bio(session["user"], bio)
+    return redirect(url_for("aboutprofile"))
+
+
+@app.route("/messages.html", methods=["GET", "POST"])
 def aboutmessages():
     if "user" not in session:
         return redirect(url_for("aboutlogin"))
-    return render_template("messages.html")
+    current_user = session["user"]
+
+    # Handle search
+    search_query = request.args.get("search", "")
+    users = dbHandler.get_all_users(
+        exclude_username=current_user, search_query=search_query
+    )
+
+    # Handle selecting a chat
+    selected_user = request.args.get("user")
+    messages = []
+    if selected_user:
+        messages = dbHandler.get_messages(current_user, selected_user)
+
+    # Handle sending a message
+    if request.method == "POST" and selected_user:
+        content = request.form.get("message")
+        if content:
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            dbHandler.add_message(
+                current_user,
+                selected_user,
+                content,
+                timestamp,
+            )
+            return redirect(url_for("aboutmessages", user=selected_user))
+
+    return render_template(
+        "messages.html",
+        users=users,
+        selected_user=selected_user,
+        messages=messages,
+        search_query=search_query,
+    )
 
 
 @app.route("/profile.html")
@@ -43,7 +92,13 @@ def aboutprofile():
     user = dbHandler.get_user(session["user"])
     username = user[1] if user else ""
     email = user[3] if user else ""
-    return render_template("profile.html", username=username, email=email)
+    bio = user[5] if user and len(user) > 5 and user[5] else "No Bio"
+    return render_template(
+        "profile.html",
+        username=username,
+        email=email,
+        bio=bio,
+    )
 
 
 @app.route("/logout")

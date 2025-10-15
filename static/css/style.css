@@ -7,7 +7,7 @@
 }
 
 body {
-  background: #fdfdfd;
+  background: #e0e0e0;
   font-family: "Nunito", sans-serif;
   font-size: 1rem;
 }
@@ -227,20 +227,40 @@ nav h1 {
   background: #14e6dd;
   color: #fff;
 }
+.message-bubble .message-date,
+.message-bubble .timestamp,
+.message-bubble .msg-timestamp {
+  color: #555 !important; /* dark grey */
+  font-size: 0.85em;
+  display: block;
+  margin-top: 0.25em;
+}
 .chat-input-form {
   display: flex;
   gap: 0.5rem;
+  align-items: center; /* Ensures vertical alignment */
 }
+
 .chat-input-form input[type="text"] {
   flex: 1;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1rem;
   border-radius: 20px;
   border: 1px solid #ccc;
   font-size: 1rem;
 }
+
+.chat-input-form input[type="text"],
+.chat-input-form button {
+  height: 40px; /* Set the same height for both */
+  line-height: 40px; /* Vertically center text */
+  box-sizing: border-box;
+}
+
 .chat-input-form button {
   border-radius: 20px;
-  padding: 0.5rem 1.5rem;
+  padding: 0 1.5rem;
+  margin-left: 0.5rem;
+  margin-top: 13px; /* Adjust this value as needed */
 }
 @media (max-width: 700px) {
   .messages-wrapper {
@@ -264,4 +284,12 @@ nav h1 {
   .chat-content {
     padding: 1rem;
   }
+}
+.message.sent .message-bubble {
+  background: #ffb6d5; /* Pink for sender */
+  color: #222; /* Dark text for sender's message */
+}
+
+.message.sent .message-bubble strong {
+  color: #111;
 }
