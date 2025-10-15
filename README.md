@@ -75,3 +75,6 @@ Test Steps:
 Expected result: New bio is saved to backend and will remain upon logging out
 
 ## Database
+
+![user_data](image.png)
+![user_messages](image-1.png)
