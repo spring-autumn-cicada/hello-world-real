@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Profile Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Relay profile page">
+    <link rel="stylesheet" href="static/css/style.css" />
+    <style>
+      body {
+        background: url("static/images/peakpx.jpg") no-repeat center center
+          fixed;
+        background-size: cover;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      main {
+        margin-top: 90px;
+        width: 60%;
+        background-color: #f3f3f3;
+        padding: 5px;
+        border-radius: 10px;
+      } 
+    </style>
+  </head>
+    <body>
+      {% include "partials/menu.html" %}
+      <main>
+        <div
+          class="profile-container"
+          style="background: none; box-shadow: none; max-width: 700px"
+        >
+        <div class="profile-header">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+          <img
+          src="{{ avatar_url or 'static/images/avatar.png' }}"
+          alt="Profile Avatar"
+          class="profile-avatar"
+          id="profile-avatar-img"
+        />
+    <form action="{{ url_for('update_avatar') }}" method="post" enctype="multipart/form-data" style="margin-top: 0.5rem;">
+      <label>
+        Profile Picture:
+        <input type="file" name="avatar" accept="image/*" style="margin-bottom: 0.5rem;" required>
+      </label>
+      
+      <button class="btn" type="submit">Change Avatar</button>
+    </form>
+  </div>
+  <div class="profile-details">
+            <h1>{{ username }}</h1>
+            <div class="profile-stats">
+              <div><span>12</span> posts</div>
+              <div><span>340</span> followers</div>
+              <div><span>180</span> following</div>
+              <div><strong>Account Created:</strong> {{ account_creation_date }}</div>
+            </div>
+            <p><strong>Email:</strong> {{ email }}</p>
+            <p>
+              <strong>Bio:</strong>
+              <span id="bio-text" style="cursor:pointer;">{{ bio }}</span>
+              <form id="bio-form" action="{{ url_for('update_bio') }}" method="post" style="display:none; margin-top:0.5rem;">
+                <input type="text" name="bio" id="bio-input" value="{{ bio }}" style="width:70%;">
+                <button class="btn" type="submit">Save</button>
+                <button type="button" onclick="cancelEdit()" class="btn" style="background:#ccc;">Cancel</button>
+              </form>
+            </p>
+            <button class="btn" style="margin-top: 1rem" onclick="editBio()">Edit Profile</button>
+          </div>
+        </div>
+        <hr style="margin: 2rem 0" />
+        <div class="posts-grid">
+          <div class="post-item">
+            <img src="static/images/post1.jpg" alt="Post 1" />
+          </div>
+          <div class="post-item">
+            <img src="static/images/post2.jpg" alt="Post 2" />
+          </div>
+          <div class="post-item">
+            <img src="static/images/post3.jpg" alt="Post 3" />
+          </div>
+          <div class="post-item">
+            <img src="static/images/post4.jpg" alt="Post 4" />
+          </div>
+          <div class="post-item">
+            <img src="static/images/post5.jpg" alt="Post 5" />
+          </div>
+          <div class="post-item">
+            <img src="static/images/post6.jpg" alt="Post 6" />
+          </div>
+        </div>
+      </div>
+      {% block content %}{% endblock %}
+    </main>
+    <script>
+      function editBio() {
+        document.getElementById('bio-text').style.display = 'none';
+        document.getElementById('bio-form').style.display = 'inline';
+        document.getElementById('bio-input').focus();
+      }
+      function cancelEdit() {
+        document.getElementById('bio-form').style.display = 'none';
+        document.getElementById('bio-text').style.display = 'inline';
+      }
+    </script>
+    <script src="static/js/app.js"></script>
+  </body>
+</html>

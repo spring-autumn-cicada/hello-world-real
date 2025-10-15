@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Messages</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Relay messages page" />
+    <link rel="stylesheet" href="static/css/style.css" />
+  </head>
+  <body>
+    {% include "partials/menu.html" %}
+    <main>
+      <div class="messages-wrapper">
+        <div class="chat-list">
+          <form
+            method="get"
+            action="{{ url_for('aboutmessages') }}"
+            style="padding: 1rem"
+          >
+            <input
+              type="text"
+              name="search"
+              placeholder="Search users..."
+              value="{{ search_query }}"
+              style="
+                width: 90%;
+                padding: 0.5rem;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+              "
+            />
+            <button type="submit" class="btn" style="margin-top: 0.5rem">
+              Search
+            </button>
+          </form>
+          {% for user in users_recent %}
+          <a
+            href="{{ url_for('aboutmessages', user=user) }}"
+            style="text-decoration: none; color: inherit"
+          >
+            <div
+              class="chat-user{% if user == selected_user %} active{% endif %}"
+            >
+              {{ user }}
+            </div>
+          </a>
+          {% endfor %} {% if users_other %}
+          <div
+            style="
+              margin: 0.5rem 0;
+              color: #aaa;
+              font-size: 0.95em;
+              text-align: center;
+            "
+          >
+            Other users
+          </div>
+          {% endif %}
+          {% for user in users_other %}
+          <a
+            href="{{ url_for('aboutmessages', user=user) }}"
+            style="text-decoration: none; color: inherit"
+          >
+            <div
+              class="chat-user{% if user == selected_user %} active{% endif %}"
+            >
+              {{ user }}
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+        <div class="chat-content">
+          {% if selected_user %}
+          <div
+            style="
+              font-weight: bold;
+              font-size: 1.2em;
+              margin-bottom: 1rem;
+              text-align: left;
+            "
+          >
+            Messaging: {{ selected_user }}
+          </div>
+          <div class="messages">
+            {% for msg in messages %}
+            <div
+              class="message{% if msg.sender == session['user'] %} sent{% endif %}"
+            >
+              {% if msg.sender == session['user'] %}
+              <div
+                style="
+                  display: flex;
+                  align-items: flex-end;
+                  justify-content: flex-end;
+                "
+              >
+                <div class="message-bubble">
+                  <strong>{{ msg.sender }}:</strong> {{ msg.content }}
+                  <span class="message-date">{{ msg.timestamp }}</span>
+                </div>
+                <img
+                  src="{{ msg.avatar_url }}"
+                  alt="avatar"
+                  class="msg-avatar"
+                  style="
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    margin-left: 8px;
+                  "
+                />
+              </div>
+              {% else %}
+              <div style="display: flex; align-items: flex-end">
+                <img
+                  src="{{ msg.avatar_url }}"
+                  alt="avatar"
+                  class="msg-avatar"
+                  style="
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    margin-right: 8px;
+                  "
+                />
+                <div class="message-bubble">
+                  <strong>{{ msg.sender }}:</strong> {{ msg.content }}
+                  <span class="message-date">{{ msg.timestamp }}</span>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+          <form
+            class="chat-input-form"
+            method="post"
+            action="{{ url_for('aboutmessages', user=selected_user) }}"
+          >
+            <input
+              type="text"
+              name="message"
+              placeholder="Type a message..."
+              required
+            />
+            <button class="btn" type="submit">Send</button>
+          </form>
+          {% else %}
+          <div style="color: #888; text-align: center; margin-top: 2rem">
+            Select a user to start messaging.
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% block content %}{% endblock %}
+    </main>
+    <script src="static/js/app.js"></script>
+  </body>
+</html>

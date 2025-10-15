@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Relay signup page" />
+    <link rel="stylesheet" href="static/css/style.css" />
+    <style>
+      body {
+        background: url("static/images/peakpx.jpg") no-repeat center center
+          fixed;
+        background-size: cover;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    {% include "partials/menu.html" %}
+    <main>
+      <div class="center-box">
+        <h1>Sign Up</h1>
+        {% if error %}
+        <div style="color: red; margin-bottom: 1rem">{{ error }}</div>
+        {% endif %}
+        <form method="post">
+          <div style="margin-bottom: 1rem; width: 100%">
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              required
+              style="
+                width: 100%;
+                padding: 0.5rem;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+              "
+            />
+          </div>
+          <div style="margin-bottom: 1rem; width: 100%">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              required
+              style="
+                width: 100%;
+                padding: 0.5rem;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+              "
+            />
+          </div>
+          <div style="margin-bottom: 1rem; width: 100%">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+              style="
+                width: 100%;
+                padding: 0.5rem;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+              "
+            />
+          </div>
+          <button class="btn" type="submit">Sign Up</button>
+        </form>
+        <p style="margin-top: 1rem">
+          Already have an account?
+          <a href="{{ url_for('aboutlogin') }}">Login</a>
+        </p>
+      </div>
+      {% block content %}{% endblock %}
+    </main>
+    <script src="static/js/app.js"></script>
+  </body>
+</html>
