@@ -32,7 +32,6 @@
               Search
             </button>
           </form>
-          <!-- Recent chats -->
           {% for user in users_recent %}
           <a
             href="{{ url_for('aboutmessages', user=user) }}"
@@ -56,7 +55,6 @@
             Other users
           </div>
           {% endif %}
-          <!-- Other users -->
           {% for user in users_other %}
           <a
             href="{{ url_for('aboutmessages', user=user) }}"
