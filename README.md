@@ -8,10 +8,10 @@
 - open a new bash terminal and run 'python main.py'
 
 User details
-Username: final
+Username: final  
 Password: final
 
-Username: cheese
+Username: cheese  
 Password: cheese
 
 You can also sign up a new account
