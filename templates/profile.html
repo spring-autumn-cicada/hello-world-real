@@ -6,75 +6,46 @@
     <meta name="description" content="Relay profile page">
     <link rel="stylesheet" href="static/css/style.css" />
     <style>
-      .profile-header {
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-        margin-bottom: 2rem;
-      }
-      .profile-avatar {
-        width: 110px;
-        height: 110px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid #14e6dd;
-      }
-      .profile-details {
-        text-align: left;
-      }
-      .profile-details h1 {
-        margin-bottom: 0.5rem;
-      }
-      .profile-stats {
-        display: flex;
-        gap: 2rem;
-        margin: 1rem 0;
-      }
-      .profile-stats div {
-        font-weight: bold;
-      }
-      .posts-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 1rem;
-        margin-top: 2rem;
-      }
-      .post-item {
-        background: #fff;
+      main {
+        margin-top: 90px;
+        width: 60%;
+        background-color: #f3f3f3; /* Change this to any color you like */
+        padding: 5px; /* Optional: Adds spacing inside the main section */
         border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        aspect-ratio: 1/1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .post-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
+      } 
     </style>
   </head>
-  <body>
-    {% include "partials/menu.html" %}
-    <main>
-      <div
-        class="profile-container"
-        style="background: none; box-shadow: none; max-width: 700px"
-      >
+    <body>
+      {% include "partials/menu.html" %}
+      <main>
+        <div
+          class="profile-container"
+          style="background: none; box-shadow: none; max-width: 700px"
+        >
         <div class="profile-header">
+        <div style="display: flex; flex-direction: column; align-items: center;">
           <img
-            src="static/images/avatar.png"
-            alt="Profile Avatar"
-            class="profile-avatar"
-          />
-          <div class="profile-details">
+          src="{{ avatar_url or 'static/images/avatar.png' }}"
+          alt="Profile Avatar"
+          class="profile-avatar"
+          id="profile-avatar-img"
+        />
+    <form action="{{ url_for('update_avatar') }}" method="post" enctype="multipart/form-data" style="margin-top: 0.5rem;">
+      <label>
+        Profile Picture:
+        <input type="file" name="avatar" accept="image/*" style="margin-bottom: 0.5rem;" required>
+      </label>
+      
+      <button class="btn" type="submit">Change Avatar</button>
+    </form>
+  </div>
+  <div class="profile-details">
             <h1>{{ username }}</h1>
             <div class="profile-stats">
               <div><span>12</span> posts</div>
               <div><span>340</span> followers</div>
               <div><span>180</span> following</div>
+              <div><strong>Account Created:</strong> {{ account_creation_date }}</div>
             </div>
             <p><strong>Email:</strong> {{ email }}</p>
             <p>

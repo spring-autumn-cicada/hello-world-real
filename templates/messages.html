@@ -32,30 +32,104 @@
               Search
             </button>
           </form>
-          {% for user in users %}
-          <div
-            class="chat-user{% if user == selected_user %} active{% endif %}"
+          <!-- Recent chats -->
+          {% for user in users_recent %}
+          <a
+            href="{{ url_for('aboutmessages', user=user) }}"
+            style="text-decoration: none; color: inherit"
           >
-            <a
-              href="{{ url_for('aboutmessages', user=user) }}"
-              style="text-decoration: none; color: inherit"
+            <div
+              class="chat-user{% if user == selected_user %} active{% endif %}"
             >
               {{ user }}
-            </a>
+            </div>
+          </a>
+          {% endfor %} {% if users_other %}
+          <div
+            style="
+              margin: 0.5rem 0;
+              color: #aaa;
+              font-size: 0.95em;
+              text-align: center;
+            "
+          >
+            Other users
           </div>
+          {% endif %}
+          <!-- Other users -->
+          {% for user in users_other %}
+          <a
+            href="{{ url_for('aboutmessages', user=user) }}"
+            style="text-decoration: none; color: inherit"
+          >
+            <div
+              class="chat-user{% if user == selected_user %} active{% endif %}"
+            >
+              {{ user }}
+            </div>
+          </a>
           {% endfor %}
         </div>
         <div class="chat-content">
           {% if selected_user %}
+          <div
+            style="
+              font-weight: bold;
+              font-size: 1.2em;
+              margin-bottom: 1rem;
+              text-align: left;
+            "
+          >
+            Messaging: {{ selected_user }}
+          </div>
           <div class="messages">
-            {% for sender, recipient, content, timestamp in messages %}
+            {% for msg in messages %}
             <div
-              class="message{% if sender == session['user'] %} sent{% endif %}"
+              class="message{% if msg.sender == session['user'] %} sent{% endif %}"
             >
-              <div class="message-bubble">
-                <strong>{{ sender }}:</strong> {{ content }}
-                <span class="message-date">{{ timestamp }}</span>
+              {% if msg.sender == session['user'] %}
+              <div
+                style="
+                  display: flex;
+                  align-items: flex-end;
+                  justify-content: flex-end;
+                "
+              >
+                <div class="message-bubble">
+                  <strong>{{ msg.sender }}:</strong> {{ msg.content }}
+                  <span class="message-date">{{ msg.timestamp }}</span>
+                </div>
+                <img
+                  src="{{ msg.avatar_url }}"
+                  alt="avatar"
+                  class="msg-avatar"
+                  style="
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    margin-left: 8px;
+                  "
+                />
               </div>
+              {% else %}
+              <div style="display: flex; align-items: flex-end">
+                <img
+                  src="{{ msg.avatar_url }}"
+                  alt="avatar"
+                  class="msg-avatar"
+                  style="
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    margin-right: 8px;
+                  "
+                />
+                <div class="message-bubble">
+                  <strong>{{ msg.sender }}:</strong> {{ msg.content }}
+                  <span class="message-date">{{ msg.timestamp }}</span>
+                </div>
+              </div>
+              {% endif %}
             </div>
             {% endfor %}
           </div>
@@ -74,7 +148,7 @@
           </form>
           {% else %}
           <div style="color: #888; text-align: center; margin-top: 2rem">
-            Select a user to start chatting.
+            Select a user to start messaging.
           </div>
           {% endif %}
         </div>

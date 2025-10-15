@@ -69,20 +69,15 @@ def listExtension():
     return data
 
 
-def add_user(username, password, email, account_creation_date):
+def add_user(username, password, email, account_creation_date, avatar=None):
+    if not avatar:
+        avatar = "static/images/avatar.jpg"
     con = sql.connect("database/data_source.db")
     cur = con.cursor()
     try:
         cur.execute(
-            "INSERT INTO user_data "
-            "(username, password, email, account_creation_date) "
-            "VALUES (?, ?, ?, ?)",
-            (
-                username,
-                password,
-                email,
-                account_creation_date,
-            ),
+            "INSERT INTO user_data (username, password, email, account_creation_date, avatar) VALUES (?, ?, ?, ?, ?)",
+            (username, password, email, account_creation_date, avatar),
         )
         con.commit()
         return True
@@ -110,3 +105,47 @@ def update_bio(username, bio):
     )
     con.commit()
     con.close()
+
+
+def update_avatar(username, avatar_path):
+    con = sql.connect("database/data_source.db")
+    cur = con.cursor()
+    cur.execute(
+        "UPDATE user_data SET avatar = ? WHERE username = ?", (avatar_path, username)
+    )
+    con.commit()
+    con.close()
+
+
+def get_avatar(username):
+    con = sql.connect("database/data_source.db")
+    cur = con.cursor()
+    cur.execute("SELECT avatar FROM user_data WHERE username = ?", (username,))
+    row = cur.fetchone()
+    con.close()
+    if row and row[0]:
+        return row[0]
+    return "static/images/avatar.jpg"  # default avatar
+
+
+def get_recent_chats(username):
+    con = sql.connect("database/data_source.db")
+    cur = con.cursor()
+    cur.execute(
+        """
+        SELECT
+            CASE
+                WHEN sender = ? THEN recipient
+                ELSE sender
+            END AS chat_partner,
+            MAX(timestamp) as last_time
+        FROM messages
+        WHERE sender = ? OR recipient = ?
+        GROUP BY chat_partner
+        ORDER BY last_time DESC
+    """,
+        (username, username, username),
+    )
+    chats = cur.fetchall()
+    con.close()
+    return [row[0] for row in chats]
