@@ -125,7 +125,7 @@ def get_avatar(username):
     con.close()
     if row and row[0]:
         return row[0]
-    return "static/images/avatar.jpg"  # default avatar
+    return "static/images/avatar.jpg"
 
 
 def get_recent_chats(username):

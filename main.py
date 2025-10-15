@@ -13,8 +13,6 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
-# Needed for session and flash
-
 UPLOAD_FOLDER = "static/uploads"
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
@@ -33,7 +31,6 @@ def update_avatar():
         filename = secure_filename(session["user"] + "_" + file.filename)
         filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
         file.save(filepath)
-        # Save the avatar path to the user's profile in your database
         dbHandler.update_avatar(session["user"], filepath)
     return redirect(url_for("aboutprofile"))
 
@@ -74,8 +71,6 @@ def aboutmessages():
     if "user" not in session:
         return redirect(url_for("aboutlogin"))
     current_user = session["user"]
-
-    # Handle search
     search_query = request.args.get("search", "")
     if search_query:
         users = [
@@ -85,17 +80,11 @@ def aboutmessages():
             )
         ]
     else:
-        # Get recent chats (by last interaction)
         recent_chats = dbHandler.get_recent_chats(current_user)
-
-        # Get all users except self
         all_users = dbHandler.get_all_users(exclude_username=current_user)
-
-        # Users never messaged = all_users - recent_chats
         other_users = [u for u in all_users if u not in recent_chats]
         users = other_users
 
-    # Handle selecting a chat
     selected_user = request.args.get("user")
     messages = []
     if selected_user:
@@ -112,8 +101,6 @@ def aboutmessages():
                     "avatar_url": avatar_url,
                 }
             )
-
-    # Handle sending a message
     if request.method == "POST" and selected_user:
         content = request.form.get("message")
         if content:
