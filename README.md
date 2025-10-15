@@ -14,6 +14,8 @@ Password: final
 Username: cheese
 Password: cheese
 
+You can also sign up a new account
+
 ### Project Description
 
 # A messaging platform simililar in functionality to instagram
