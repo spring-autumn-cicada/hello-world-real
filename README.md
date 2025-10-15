@@ -1,5 +1,12 @@
 # hello-world-real
 
+### **Important** How to run application
+
+- download main branch as a zip file
+- extract zip file to VS Code
+- press 'ctrl' + '`' to open terminal
+- open a new bash terminal and run 'python main.py'
+
 ### Project Description
 
 # A messaging platform simililar in functionality to instagram
@@ -177,4 +184,5 @@ In fixing it some other minor issues came up, these were solved one by one to ma
 ![signup](<working_documents/Screenshot 2025-10-15 173317.png>)
 ![messages](<working_documents/Screenshot 2025-10-15 173409.png>)
 ![profile](<working_documents/Screenshot 2025-10-16 014101.png>)
-the missing 4 from best practises is due to not using any placeholders for the posts
+the missing 4 from best practises is due to not using any placeholders for the posts "
+![error](<working_documents/Screenshot 2025-10-16 100445.png>)
